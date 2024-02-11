@@ -13,7 +13,7 @@ const donationApi = baseApi.injectEndpoints({
         method: "GET",
         headers: token,
       }),
-      providesTags: ["Post"],
+      providesTags: ["donation"],
     }),
     getSingleDonations: build.query({
       query: ({ id }) => {
@@ -22,6 +22,7 @@ const donationApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      // providesTags: ["donation"],
     }),
     getDonationsCategory: build.query({
       query: () => ({
@@ -45,15 +46,13 @@ const donationApi = baseApi.injectEndpoints({
       }),
     }),
     updateDonationPost: build.mutation({
-      query: ({ token, id, ...data }) => {
-        return {
-          url: `/donation-post/post/${id}`,
-          method: "PUT",
-          headers: token,
-          body: data,
-        };
-      },
-      invalidatesTags: ["Post"],
+      query: ({ token, id, ...data }) => ({
+        url: `/donation-post/post/${id}`,
+        method: "PUT",
+        headers: token,
+        body: data,
+      }),
+      invalidatesTags: ["donation"],
     }),
     postUserDonation: build.mutation({
       query: ({ token, ...data }) => {

@@ -34,7 +34,6 @@ const UpdateModal = ({ id }) => {
     data: categories,
   } = useGetDonationsCategoryQuery();
   const [isOpen, setIsOpen] = useState(false);
-  const [udpate] = useUpdateDonationPostMutation();
   const { data: getData, isSuccess: getIsSuccess } = useGetSingleDonationsQuery(
     { id }
   );
@@ -54,7 +53,7 @@ const UpdateModal = ({ id }) => {
   };
   const onSubmit = async (data) => {
     data.id = getData?.data?._id;
-    updatePost(data);
+    await updatePost(data);
     setIsOpen(false);
   };
 
