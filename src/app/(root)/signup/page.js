@@ -2,10 +2,12 @@
 import { createUser } from "@/utils/user-actions";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 const Signup = () => {
+  const navigate = useRouter();
   const {
     register,
     handleSubmit,
@@ -18,6 +20,7 @@ const Signup = () => {
     const res = await createUser(data);
     if (res.success) {
       toast.success("User created successfull");
+      navigate.push("/login");
     } else {
       toast.error(res.message);
     }
